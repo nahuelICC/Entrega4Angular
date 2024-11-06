@@ -1,0 +1,53 @@
+<div class='container is-fluid'>
+  <mat-card>
+    <mat-card-content>
+<mat-form-field>
+  <mat-label>Filtro</mat-label>
+  <input matInput (keyup)="filtro($event)" placeholder="Buscar" #input>
+</mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Estado</mat-label>
+    <mat-select (selectionChange)="filtro2($event)">
+      <mat-option value="todos">Todos</mat-option>
+      <mat-option value="aprobado">Aprobado</mat-option>
+      <mat-option value="suspenso">Suspenso</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z6">
+  <ng-container matColumnDef="nombre">
+    <th mat-header-cell *matHeaderCellDef>Nombre</th>
+    <td mat-cell *matCellDef="let alumno"> {{alumno.nombre}} </td>
+  </ng-container>
+  <ng-container matColumnDef="apellido">
+    <th mat-header-cell *matHeaderCellDef>Apellido</th>
+    <td mat-cell *matCellDef="let alumno"> {{alumno.apellido}} </td>
+  </ng-container>
+  <ng-container matColumnDef="nota">
+    <th mat-header-cell *matHeaderCellDef>Nota</th>
+    <td mat-cell *matCellDef="let alumno"> {{alumno.nota}} </td>
+  </ng-container>
+  <ng-container matColumnDef="estado">
+    <th mat-header-cell *matHeaderCellDef>Estado</th>
+    <td mat-cell *matCellDef="let alumno"> {{alumno.nota >=5 ? 'Aprobado' : 'Suspendo'}} </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+  <tr mat-row *matRowDef="let row; columns: columnas;"></tr>
+</table>
+
+  <mat-form-field>
+    <input matInput placeholder="Nombre" [(ngModel)]="nombre">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Apellido" [(ngModel)]="apellido">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Nota" [(ngModel)]="nota">
+  </mat-form-field>
+    <button class="button is-danger" (click)="nuevoAlumno()">Añadir</button>
+    </mat-card-content>
+</mat-card>
+</div>
